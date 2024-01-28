@@ -1,7 +1,7 @@
 import sys
 
-li = (list(map(int, sys.stdin.readline().split(' '))))
-# print(sum(map(int, sys.stdin.readline().split(' '))))
+li = list(map(int, sys.stdin.readline().split(' ')))
+# print(li)
 
 result = 0
 
