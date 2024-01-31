@@ -22,7 +22,7 @@ public class Main {
         }
         System.out.print(sum);
         System.out.print(' ');
-        System.out.println(((double) sum / count));
+        System.out.println(Math.round((double)sum / count * 10) / 10.0);
 
         // System.out.println(sum + ' ' + ((double) sum / count));
         
