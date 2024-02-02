@@ -16,7 +16,7 @@ public class Main {
         System.out.println(getSum(intArr[0]) + " " + getSum(intArr[1]));
 
         System.out.println(getSumCol(intArr, 0) + " " + getSumCol(intArr, 1) + " " + getSumCol(intArr, 2)+ " " + getSumCol(intArr, 3));
-        System.out.println(getSumTotal(intArr));
+        System.out.println(Math.round(getSumTotal(intArr) * 10) /10.0);
         // 여기에 코드를 작성해주세요.
     }
 
