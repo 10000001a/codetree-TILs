@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Main {
@@ -25,13 +26,14 @@ public class Main {
         for (int i = 0; i < m; i++) {
             int num = sc.nextInt();
 
-            System.out.print(hashMap.getOrDefault(num, 0));
+            // System.out.print(hashMap.getOrDefault(num, 0));
+            arr.add(hashMap.getOrDefault(num, 0));
 
-            if (i != m - 1) {
-                System.out.print(" ");
-            }
+            // if (i != m - 1) {
+            //     System.out.print(" ");
+            // }
         }
 
-        // System.out.println(arr.stream().map(Object::toString).collect(joining(" ")));
+        System.out.println(arr.stream().map(Object::toString).collect(Collectors.joining(" ")));
     }
 }
