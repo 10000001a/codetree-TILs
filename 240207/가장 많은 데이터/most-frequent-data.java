@@ -14,7 +14,14 @@ public class Main {
             countMap.put(input, countMap.getOrDefault(input, 0) + 1);
         }
 
-        System.out.println(countMap.values().stream().mapToInt(i->i).max().getAsInt());
+        System.out.println(
+            countMap
+            .values()
+            .stream()
+            .mapToInt(i->i)
+            .max()
+            .getAsInt()
+        );
         // 여기에 코드를 작성해주세요.
     }
 }
