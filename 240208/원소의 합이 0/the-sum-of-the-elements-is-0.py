@@ -4,10 +4,10 @@ IN = sys.stdin.readline
 
 n = int(IN());
 
-A = list(map(int, IN()[:-1].split(' ')))
-B = list(map(int, IN()[:-1].split(' ')))
-C = list(map(int, IN()[:-1].split(' ')))
-D = list(map(int, IN()[:-1].split(' ')))
+A = list(map(int, IN()[:-1].split()))
+B = list(map(int, IN()[:-1].split()))
+C = list(map(int, IN()[:-1].split()))
+D = list(map(int, IN()[:-1].split()))
 
 dict_ab = {}
 dict_cd = {}
