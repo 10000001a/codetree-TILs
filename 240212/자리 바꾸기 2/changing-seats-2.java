@@ -40,8 +40,14 @@ public class Main {
                 seat.set(p.a, seat.get(p.b));
                 seat.set(p.b, tmp);
 
-                seatCount.get(seat.get(p.a)).add(p.a);
-                seatCount.get(seat.get(p.b)).add(p.b);
+                if (!seatCount.get(seat.get(p.a)).contains(p.a)) {
+                    seatCount.get(seat.get(p.a)).add(p.a);
+                }
+
+                if (!seatCount.get(seat.get(p.b)).contains(p.b)) {
+                    seatCount.get(seat.get(p.b)).add(p.b);
+                }
+
             }
         }
         
