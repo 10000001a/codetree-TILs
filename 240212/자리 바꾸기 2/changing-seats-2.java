@@ -14,16 +14,13 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
     static int N;
     static int K;
-    static List<HashSet<Integer>> seatCount;
-    static List<Pair> changeList;
-    static List<Integer> seat;
+    static List<HashSet<Integer>> seatCount = new ArrayList<HashSet<Integer>>();
+    static List<Pair> changeList = new ArrayList<Pair>();
+    static List<Integer> seat = new ArrayList<Integer>();
 
     public static void main(String[] args) {
         N = sc.nextInt();
         K = sc.nextInt();
-        
-        seatCount = new ArrayList<HashSet<Integer>>();
-        seat = new ArrayList<Integer>(N + 1);
 
         for (int i = 0; i < N + 1; i++) {
             seatCount.add(new HashSet<Integer>());
@@ -32,8 +29,6 @@ public class Main {
             }
             seat.add(i);
         }
-
-        changeList = new ArrayList<Pair>();
 
         for (int i = 0; i < K; i++) {
             changeList.add(new Pair(sc.nextInt(), sc.nextInt()));
