@@ -7,7 +7,7 @@ N, K = map(int, IN().split())
 x = [set([i]) for i in range(N + 1)]
 
 seat = {
-    i: i for i in range(K + 1)
+    i: i for i in range(N + 1)
 }
 
 change = [
