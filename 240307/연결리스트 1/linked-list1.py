@@ -31,11 +31,11 @@ for _ in range(n):
         cur.setNext(Node(input_[1]))
 
 
-    if input_[0] == '3':
+    if input_[0] == '3' and cur.prev is not None:
         cur = cur.prev
 
 
-    if input_[0] == '4':
+    if input_[0] == '4' and cur.next_ is not None:
         cur = cur.next_
     
 
