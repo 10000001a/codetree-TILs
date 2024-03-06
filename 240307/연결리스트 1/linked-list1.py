@@ -24,11 +24,24 @@ for _ in range(n):
     input_ = IN().split()
 
     if input_[0] == '1':
-        cur.setPrev(Node(input_[1]))
+        new_node = Node(input_[1])
+        
+        if cur.prev is not None:
+            cur.prev.setNext(new_node)
+            new_node.setPrev(cur.prev)
+        new_node.setNext(cur)
+        cur.setPrev(new_node)
 
     
     if input_[0] == '2':
-        cur.setNext(Node(input_[1]))
+        new_node = Node(input_[1])
+
+        if cur.next_ is not None:
+            cur.next_.setPrev(new_node)
+            new_node.setNext(cur.next_)
+        new_node.setPrev(cur)
+        cur.setNext(new_node)
+
 
 
     if input_[0] == '3' and cur.prev is not None:
