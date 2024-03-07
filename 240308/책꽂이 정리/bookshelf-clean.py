@@ -32,7 +32,8 @@ class Shelf:
         return self.books.append(book)
 
     def appendleftall(self, books):
-        self.books = deque(list(books) + list(self.books))
+        self.books.extendleft(reversed(books))
+        # self.books = deque(list(books) + list(self.books))
     
     def appendall(self, books):
         self.books = deque(list(self.books) + list(books))
