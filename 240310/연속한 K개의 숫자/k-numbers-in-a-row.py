@@ -40,4 +40,4 @@ for i in range(k + 1, n + 1):
 # 1 2     5       9 10
 # print(ans)
     
-print(min(ans))
+print(min(ans[k - 1:]))
