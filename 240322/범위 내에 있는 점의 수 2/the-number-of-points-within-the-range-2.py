@@ -18,5 +18,7 @@ for i in range(1, dots[-1]+ 1):
 
 for _ in range(Q):
     x, y = map(int, IN().split())
+    x = x if x > 0 else 0
     y = min(y, len(sum_) - 1)
+    
     print(sum_[y] - sum_[x - 1])
