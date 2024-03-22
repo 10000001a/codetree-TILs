@@ -19,7 +19,7 @@ for i in range(1, dots[-1]+ 1):
 
 for _ in range(Q):
     x, y = map(int, IN().split())
-    x = x if x > 0 else 0
+    x = x if x > 0 else 1
     if x >= len(sum_):
         print(0)
         continue
