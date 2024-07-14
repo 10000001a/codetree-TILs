@@ -26,7 +26,7 @@ public class Main {
         
         int aIndex = appropriateIndex(arr[wrongIndex]);
 
-        System.out.println("wrong index: " + wrongIndex + ", aIndex: " + aIndex);
+        // System.out.println("wrong index: " + wrongIndex + ", aIndex: " + aIndex);
 
         if (aIndex < wrongIndex) {
             answer = countChange(aIndex, wrongIndex - 1);
