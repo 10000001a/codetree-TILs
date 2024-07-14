@@ -56,7 +56,7 @@ public class Main {
 
         for (int i = start; i <= end; i++) {
             if (arr[i] == arr[wrongIndex]) {
-                break;
+                continue;
             }
    
             if (before != arr[i]) {
