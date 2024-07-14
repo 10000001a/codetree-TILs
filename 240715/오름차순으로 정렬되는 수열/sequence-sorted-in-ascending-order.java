@@ -31,7 +31,7 @@ public class Main {
         if (aIndex < wrongIndex) {
             answer = countChange(aIndex, wrongIndex - 1);
         } else {
-            answer = countChange(wrongIndex + 1, aIndex);
+            answer = countChange(wrongIndex + 1, aIndex - 1);
         }
 
         
@@ -51,6 +51,7 @@ public class Main {
     }
 
     private static int countChange(int start, int end) {
+        // System.out.println(start + "  " + end);
         int count = 0;
         int before = -1;
 
