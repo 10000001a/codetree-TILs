@@ -19,17 +19,45 @@ public class Main {
             }
         }
 
-        final int wrongNumber = arr[wrongIndex];
-        int before = -1;    
-        for (int i = wrongIndex - 1; i >= 0; i--) {
-            if (arr[i] > wrongNumber) {
-                if (arr[i] != before) {
-                    answer++;
-                    before = arr[i];
-                }
+        if (wrongIndex == n - 1 ||  arr[wrongIndex - 2] > arr[wrongIndex]) {} else {
+            wrongIndex--;
+        }
+
+        
+        int aIndex = appropriateIndex(arr[wrongIndex]);
+
+        System.out.println("wrong index: " + wrongIndex + ", aIndex: " + aIndex);
+
+        if (aIndex < wrongIndex) {
+            answer = countChange(aIndex, wrongIndex - 1);
+        } else {
+            answer = countChange(wrongIndex + 1, aIndex);
+        }
+
+        
+        System.out.println(answer);
+    }
+
+    private static int appropriateIndex(int number) {
+        for (int i = 0; i < n; i++) {
+            if (arr[i] >= number) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static int countChange(int start, int end) {
+        int count = 0;
+        int before = -1;
+
+        for (int i = start; i <= end; i++) {
+            if (before != arr[i]) {
+                count++;
+                before = arr[i];
             }
         }
 
-        System.out.println(answer);
+        return count;
     }
 }
