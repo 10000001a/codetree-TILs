@@ -40,6 +40,9 @@ public class Main {
 
     private static int appropriateIndex(int number) {
         for (int i = 0; i < n; i++) {
+            if (i == wrongIndex) {
+                continue;
+            }
             if (arr[i] >= number) {
                 return i;
             }
@@ -52,6 +55,10 @@ public class Main {
         int before = -1;
 
         for (int i = start; i <= end; i++) {
+            if (arr[i] == arr[wrongIndex]) {
+                break;
+            }
+   
             if (before != arr[i]) {
                 count++;
                 before = arr[i];
