@@ -26,7 +26,9 @@ public class Main {
 
     public static void heapSort() {
         for (int i = 0; i < n; i++) {
+            // System.out.println("i: "+i);
             swap(1, n - i);
+            
             // print();
             heapify(1, n - i - 1);
             // print();
@@ -50,7 +52,7 @@ public class Main {
                 heapify(index * 2, range);
             }
 
-            if (c > b) {
+            if (c >= b) {
                 swap(index, index * 2 + 1);
                 heapify(index * 2 + 1, range);
             }
