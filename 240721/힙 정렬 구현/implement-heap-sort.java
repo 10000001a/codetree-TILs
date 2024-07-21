@@ -50,9 +50,7 @@ public class Main {
             if (b > c) {
                 swap(index, index * 2);
                 heapify(index * 2, range);
-            }
-
-            if (c >= b) {
+            } else {
                 swap(index, index * 2 + 1);
                 heapify(index * 2 + 1, range);
             }
