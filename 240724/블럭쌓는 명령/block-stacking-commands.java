@@ -29,7 +29,7 @@ public class Main {
 
         quickSort(0, N - 1);
         
-        // printArr();
+        printArr();
 
         System.out.print(arr[N / 2]);
 
@@ -63,26 +63,21 @@ public class Main {
     }
 
     public static int partition(int start, int end) {
-        int maxIndexOfLeft = start - 1;
-        // int minIndexOfRight = start;
+
+        int lowIndex = start - 1;
 
         int pivot = arr[end];
 
         for (int i = start; i < end; i++) {
-            if (arr[i] < pivot) {
-                swap(maxIndexOfLeft+ 1, i);
-                maxIndexOfLeft++;
-                // minIndexOfRight++;
-            } else {
-                // minIndexOfRight++;
-                // swap(maxIndexOfLeft+ 1, i);
-                // maxIndexOfLeft++;
+            if (arr[i] <= pivot) {
+                swap(lowIndex + 1, i);
+                lowIndex++;
             }
         }
 
-        swap(maxIndexOfLeft + 1, end);
+        swap(lowIndex + 1, end);
 
-        return maxIndexOfLeft + 1;
+        return lowIndex + 1;
     }
 
     // public static int selectPivot(int start, int end) {
