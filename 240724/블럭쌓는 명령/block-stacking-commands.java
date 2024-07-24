@@ -57,32 +57,47 @@ public class Main {
 
         quickSort(start, idx - 1);
         quickSort(idx + 1, end);
-
-        
-        
     }
 
     public static int partition(int start, int end) {
 
         int lowIndex = start - 1;
 
-        int pivot = arr[end];
+        int pivot = selectPivot(start, end);
 
-        for (int i = start; i < end; i++) {
-            if (arr[i] <= pivot) {
-                swap(lowIndex + 1, i);
+        for (int i = start; i <= end; i++) {
+            if (arr[i] <= arr[pivot]) {
                 lowIndex++;
+                swap(lowIndex, i);
             }
         }
 
-        swap(lowIndex + 1, end);
+        swap(lowIndex, pivot);
 
-        return lowIndex + 1;
+        return lowIndex;
     }
 
-    // public static int selectPivot(int start, int end) {
+    public static int selectPivot(int i, int j) {
+        final int mid = (i + j) / 2;
+        
+        if (arr[i] >= arr[mid] && arr[mid] >= arr[j]) {
+            return mid;
+        }
 
-    // }
+        if (arr[i] <= arr[mid] && arr[mid] <= arr[j]) {
+            return mid;
+        }
+
+        if (arr[mid] >= arr[i] && arr[i] >= arr[j]) {
+            return i;
+        }
+
+        if (arr[mid] <= arr[i] && arr[i] <= arr[j]) {
+            return i;
+        }
+
+        return j;
+    }
 
     public static void swap(int i, int j) {
         int tmp = arr[i];
