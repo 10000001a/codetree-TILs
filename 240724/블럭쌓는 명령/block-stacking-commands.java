@@ -29,7 +29,7 @@ public class Main {
 
         quickSort(0, N - 1);
         
-        printArr();
+        // printArr();
 
         System.out.print(arr[N / 2]);
 
