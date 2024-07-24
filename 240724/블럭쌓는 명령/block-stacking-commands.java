@@ -39,6 +39,7 @@ public class Main {
         for (int i = 0; i < N; i++) {
             System.out.print(arr[i] + " ");
         }
+        System.out.println("");
     }
 
     public static void quickSort(int start, int end) {
@@ -63,18 +64,20 @@ public class Main {
 
         int lowIndex = start - 1;
 
-        int pivot = selectPivot(start, end);
+        // int pivot = selectPivot(start, end);
+        int pivot = end;
 
-        for (int i = start; i <= end; i++) {
-            if (arr[i] <= arr[pivot]) {
+        // System.out.println("pivot: " + pivot);
+
+        for (int i = start; i < end; i++) {
+            if (arr[i] < arr[pivot]) {
                 lowIndex++;
                 swap(lowIndex, i);
             }
         }
+        swap(lowIndex + 1, end);
 
-        swap(lowIndex, pivot);
-
-        return lowIndex;
+        return lowIndex + 1;
     }
 
     public static int selectPivot(int i, int j) {
@@ -100,7 +103,9 @@ public class Main {
     }
 
     public static void swap(int i, int j) {
+        // System.out.println("swap: " + i + " " + j);
         int tmp = arr[i];
+        
         arr[i] = arr[j];
         arr[j] = tmp;
     }
