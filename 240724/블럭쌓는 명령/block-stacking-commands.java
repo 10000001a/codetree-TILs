@@ -64,8 +64,8 @@ public class Main {
 
         int lowIndex = start - 1;
 
-        // int pivot = selectPivot(start, end);
-        int pivot = end;
+        int pivot = selectPivot(start, end);
+        // int pivot = end;
 
         // System.out.println("pivot: " + pivot);
 
