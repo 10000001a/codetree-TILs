@@ -3,7 +3,7 @@ import java.util.*;
 public class Main {
     static final int MAX = 91;
     static int n;
-    static int[] arr = new int[MAX];
+    static long[] arr = new long[MAX];
 
     public static void main(String[] args) {
         final Scanner sc = new Scanner(System.in);
@@ -11,17 +11,17 @@ public class Main {
         n = sc.nextInt();
 
         for (int i = 0; i < MAX; i++) {
-            arr[i] = 0;
+            arr[i] = 0l;
         }
 
-        arr[1] = 1;
-        arr[2] = 1;
+        arr[1] = 1l;
+        arr[2] = 1l;
 
         System.out.println(getNum(n));
     }
 
-    private static int getNum(int index) {
-        if (arr[index] == 0) {
+    private static long getNum(int index) {
+        if (arr[index] == 0l) {
             arr[index] = getNum(index - 1) + getNum(index - 2);
             return arr[index];
         }
