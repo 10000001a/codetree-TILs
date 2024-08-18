@@ -9,19 +9,14 @@ public class Main {
 
         N = sc.nextInt();
 
-        for (int i = 0; i < MAX_N + 1; i++) {
-            memo[i] = -1;
-        }
-
         System.out.println(fib(N));
     }
 
     private static int fib(int n) {
-        if (memo[n] >= 0) {
+        if (memo[n] > 0) {
             return memo[n];
         }
         if (n == 0) {
-            memo[n] = 0;
             return 0;
         }
 
