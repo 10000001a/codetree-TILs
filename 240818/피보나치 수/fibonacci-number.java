@@ -35,6 +35,21 @@ public class Main {
             return 2;
         }
 
+        if (n == 4) {
+            memo[n] = 3;
+            return 3;
+        }
+
+        if (n == 5) {
+            memo[n] = 5;
+            return 5;
+        }
+
+        if (n == 6) {
+            memo[n] = 8;
+            return 8;
+        }
+
         memo[n] = fib(n - 1) + fib(n - 2);
 
         return memo[n];
