@@ -20,26 +20,31 @@ public class Main {
     }
 
     private static int getResult(int n) {
+        // System.out.println(n);
+        // for (int i = 0; i <= N; i++) {
+        //     System.out.println(memo[i]);
+        // }
+        // System.out.println("");
+
         if (memo[n] > 0) {
+
+            if (memo[n] >= 1000000007) {
+                memo[n] = memo[n] % 1000000007;
+            }
+
             return memo[n];
         }
 
-        int result = 0;
+        long result = 0l;
 
-        for (int i = 1; i <= n; i++) {
-            if (i == 2) {
-                result += (getResult(n - i) * 3);
-            } else if (i == n - 1) {
-                result += 2;
-            } else {
-                result += (getResult(n - i) * 2);
-            }
+        result = (long) getResult(n - 1) * 2 + (long) getResult(n - 2) * 3;
+        
+        for (int i = 0; i < n - 2; i++) {
+            result += (getResult(i) * 2);
         }
 
-        result += 2;
-
-        memo[n] = result % 1000000007;
-
+        memo[n] = (int) (result % 1000000007);
+    
         return memo[n];
     }
 
