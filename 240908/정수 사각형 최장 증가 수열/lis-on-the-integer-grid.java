@@ -52,7 +52,7 @@ public class Main {
                     
                 } else {
                     if (grid[nx][ny] > grid[x][y]) {
-                        memo[nx][ny] = Math.max(memo[nx][ny], memo[nx][ny] + 1);
+                        memo[nx][ny] = Math.max(memo[nx][ny], memo[x][y] + 1);
                     }
                 }
             }
@@ -77,7 +77,7 @@ public class Main {
     private static void initalizeMatrix() {
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
-                matrix.add(new Cell(memo[i][j], i, j));
+                matrix.add(new Cell(grid[i][j], i, j));
             }
         }
     }
