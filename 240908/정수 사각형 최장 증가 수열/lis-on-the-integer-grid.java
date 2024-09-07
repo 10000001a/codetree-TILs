@@ -81,20 +81,8 @@ public class Main {
     private static void initalizeMatrix() {
         for (int i = 1; i <= N; i++) {
             for (int j = 1; j <= N; j++) {
-                matrix.add(new Cell(grid[i][j], i, j));
+                matrix.add(new Cell(memo[i][j], i, j));
             }
         }
     }
-
-    // private static void initalizeMemo() {
-    //     for (int i = 1; i <= N; i++) {
-    //         for (int j = 1; j <= N; j++) {
-    //             matrix[i][j] = sc.nextInt();
-    //         }
-    //     }
-    // }
 }
-
-//  1   2   1
-//  2   1   2
-//  2   1   2
