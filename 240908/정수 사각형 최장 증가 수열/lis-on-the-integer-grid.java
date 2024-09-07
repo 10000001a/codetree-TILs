@@ -48,16 +48,12 @@ public class Main {
                 int nx = x + dx[j];
                 int ny = y + dy[j];
 
-                if (nx <= 0 || nx > N) {
-                    continue;
-                }
-
-                if (ny <= 0 || ny > N) {
-                    continue;
-                }
-
-                if (grid[nx][ny] > grid[x][y]) {
-                    memo[nx][ny] = Math.max(memo[nx][ny], memo[nx][ny] + 1);
+                if ((nx <= 0 || nx > N) || (ny <= 0 || ny > N)) {
+                    
+                } else {
+                    if (grid[nx][ny] > grid[x][y]) {
+                        memo[nx][ny] = Math.max(memo[nx][ny], memo[nx][ny] + 1);
+                    }
                 }
             }
         }
