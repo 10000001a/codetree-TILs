@@ -25,12 +25,15 @@ public class Main {
 
         for (int i = 4; i < (N + M + 1); i++){
             if (i - 2 > N) {
-                for (int j = (i - (N)); j <= Math.min(M, N + 2); j++) {
-                    // System.out.println("-i: " + (i - j) + ", j: " + j);
-                    setDP(i - j, j);
+                for (int j = (i - (N)); j <= M; j++) {
+                    // if (i == 30)
+                    //     System.out.println("-i: " + (i - j) + ", j: " + j);
+                    if (i - j >= 1)
+                        setDP(i - j, j);
                 }
             } else {
                 for (int j = 2; j <= Math.min(i - 2, M); j++) {
+
                     // System.out.println("i: " + (i - j) + ", j: " + j);
                     
                     setDP(i - j, j);
