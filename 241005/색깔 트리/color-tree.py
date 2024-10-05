@@ -1,3 +1,4 @@
+from sysconfig import get_scheme_names
 from typing import List, Optional
 from collections import deque
 
@@ -95,6 +96,24 @@ class Tree:
 
         return sum(map(lambda b: (bin(b).count('1') ** 2), score_list))
 
+    def get_score_2(self):
+        score_list = [0] * 100001
+
+        for root_node in self.root:
+            self.get_score_backtrack(root_node, score_list)
+
+        return sum(map(lambda b: (bin(b).count('1') ** 2), score_list))
+
+    def get_score_backtrack(self, node: Node, score_list: List[int]):
+        binary_score = node.get_binary_color()
+
+        for child in node.children:
+            binary_score = self.get_score_backtrack(child, score_list) | binary_score
+
+        score_list[node.id] = binary_score
+
+        return binary_score
+
 
 ###########################################################################
 
@@ -122,4 +141,4 @@ for _ in range(N):
         print(tree.get_color(int(command_and_args[1])))
 
     if command == '400':
-        print(tree.get_score())
+        print(tree.get_score_2())
