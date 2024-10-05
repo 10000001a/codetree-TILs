@@ -50,8 +50,7 @@ class Tree:
         while will_visit:
             current_visit_node = will_visit.popleft()
 
-            for child in current_visit_node.children:
-                will_visit.append(child)
+            will_visit.extend(current_visit_node.children)
 
             current_visit_node.change_color(color)
 
@@ -73,8 +72,7 @@ class Tree:
         while will_visit:
             current_node: Node = will_visit.popleft()
 
-            for child in current_node.children:
-                will_visit.append(child)
+            will_visit.extend(current_node.children)
 
             score_list[current_node.id] = current_node.get_binary_color()
 
@@ -83,10 +81,17 @@ class Tree:
 
             parent_node: Node = self.node_list[current_node.parent_id]
 
-            if parent_node.color != current_node.color:
-                while parent_node is not None:
-                    score_list[parent_node.id] = score_list[parent_node.id] | score_list[current_node.id]
-                    parent_node = self.node_list[parent_node.parent_id]
+            while parent_node is not None:
+                binary_str = bin(score_list[parent_node.id])
+                binary_str = binary_str[2:]
+                if len(binary_str) < 5:
+                    binary_str = '0' * (5 - len(binary_str)) + binary_str
+                if binary_str[current_node.color - 1] == '1':
+                    break
+
+                score_list[parent_node.id] = score_list[parent_node.id] | score_list[current_node.id]
+
+                parent_node = self.node_list[parent_node.parent_id]
 
         return sum(map(lambda b: (bin(b).count('1') ** 2), score_list))
 
