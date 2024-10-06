@@ -1,6 +1,6 @@
 from collections import deque
 from enum import Enum
-from typing import Tuple, Optional, List
+from typing import Tuple, List
 
 
 class Direction(Enum):
@@ -128,15 +128,15 @@ class Forest:
         if result and center.row >= 0:
             result = (result and
                       self.map[center.row][center.col - 2] == -1)
-
         if result and center.row >= 1:
             result = (result and
                       self.map[center.row - 1][center.col - 1] == -1)
 
-        result = (result and
-                  self.map[center.row + 1][center.col - 2] == -1 and
-                  self.map[center.row + 2][center.col - 1] == -1)
-
+        if center.row >= -1:
+            result = result and  self.map[center.row + 1][center.col - 2] == -1
+        if center.row >= -2:
+            result = result and  self.map[center.row + 2][center.col - 1] == -1
+            
         return result
 
     def is_east_empty(self, golem):
@@ -177,15 +177,10 @@ class Forest:
     def save_golem(self, golem):
         center: Cell = golem.location
 
-    # if center.row >= -1:
         self.map[center.row + 1][center.col] = golem.id
-
-    # if center.row >= 0:
         self.map[center.row][center.col - 1] = golem.id
         self.map[center.row][center.col] = golem.id
         self.map[center.row][center.col + 1] = golem.id
-
-    # if center.row >= 1:
         self.map[center.row - 1][center.col] = golem.id
 
     def clear_golem(self):
@@ -200,7 +195,10 @@ class Forest:
 
         while will_visit:
             current_golem: Golem = will_visit.popleft()
-            # print(current_golem.id, current_golem.location.row, current_golem.location.col)
+
+            if current_golem.id in visited:
+                continue
+
             score = max(score, current_golem.location.row + 1)
             visited.add(current_golem.id)
 
@@ -242,11 +240,7 @@ forest = Forest(R, C)
 
 for i in range(K):
     col, dir_num = map(int, input().split())
-    # print(i, col)
     forest.golem_start(Golem(i, col - 1, Direction.from_num(dir_num)))
-    # if i == 49:
-    #     forest.print()
-    # print('i: ', i)
 
 print(forest.score)
 
@@ -278,25 +272,25 @@ print(forest.score)
 # 43 2
 # 49 2
 # 2 0
-# 5 0
+# 5 0 # 27
 # 14 1
-# 7 0
-# 31 2
+# 7 0  # 29
+# 31 2 # 30
 # 15 0
-# 58 0
+# 58 0 # 32
 # 38 2
-# 47 1
+# 47 1 # 34
 # 6 3
 # 68 1
-# 46 2
+# 46 2 # 37
 # 69 0
-# 44 1
-# 63 1
-# 25 0
-# 22 3
-# 15 1
-# 35 3
-# 24 1
+# 44 1 # 39
+# 63 1 # 40
+# 25 0 # 41
+# 22 3 # 42
+# 15 1 # 43
+# 35 3 # 44
+# 24 1 # 45
 # 66 2
 # 7 1
 # 19 1
