@@ -35,13 +35,6 @@ class Cell:
         self.col = col
 
 
-class ForestCellType(Enum):
-    EMPTY = -1
-    NORMAL = 0
-    CENTER = 1
-    EXIT = 2
-
-
 class Golem:
     def __init__(self, id: int, col: int, exit_dir: Direction):
         self.id = id
@@ -82,7 +75,9 @@ class Forest:
 
         self.save_golem(golem)
         # print('score:', self.get_score(golem) + 1)
-        self.score = self.score + self.get_score(golem) + 1
+        new_score = self.get_score(golem)
+        if new_score >= 2:
+            self.score = self.score + new_score + 1
 
     def move_golem(self, golem: Golem) -> bool:
         if self.is_south_empty(golem):
@@ -182,16 +177,16 @@ class Forest:
     def save_golem(self, golem):
         center: Cell = golem.location
 
-        if center.row >= -1:
-            self.map[center.row + 1][center.col] = golem.id
+    # if center.row >= -1:
+        self.map[center.row + 1][center.col] = golem.id
 
-        if center.row >= 0:
-            self.map[center.row][center.col - 1] = golem.id
-            self.map[center.row][center.col] = golem.id
-            self.map[center.row][center.col + 1] = golem.id
+    # if center.row >= 0:
+        self.map[center.row][center.col - 1] = golem.id
+        self.map[center.row][center.col] = golem.id
+        self.map[center.row][center.col + 1] = golem.id
 
-        if center.row >= 1:
-            self.map[center.row - 1][center.col] = golem.id
+    # if center.row >= 1:
+        self.map[center.row - 1][center.col] = golem.id
 
     def clear_golem(self):
         self.golems = {}
@@ -199,7 +194,7 @@ class Forest:
             self.map[j] = list([-1] * len(self.map[0]))
 
     def get_score(self, golem: Golem) -> int:
-        score = 0
+        score = -1
         will_visit = deque([golem])
         visited = set()
 
@@ -247,7 +242,69 @@ forest = Forest(R, C)
 
 for i in range(K):
     col, dir_num = map(int, input().split())
+    # print(i, col)
     forest.golem_start(Golem(i, col - 1, Direction.from_num(dir_num)))
-    # forest.print()
+    # if i == 49:
+    #     forest.print()
+    # print('i: ', i)
 
 print(forest.score)
+
+# 5 70 50
+# 12 2
+# 69 3
+# 18 3
+# 14 1
+# 35 3
+# 28 1
+# 68 3
+# 62 3
+# 32 3
+# 19 2
+# 6 3
+# 4 2
+# 4 1
+# 7 0
+# 46 3
+# 65 3
+# 62 2
+# 10 0
+# 17 1
+# 36 1
+# 62 1
+# 17 0
+# 24 0
+# 66 0
+# 43 2
+# 49 2
+# 2 0
+# 5 0
+# 14 1
+# 7 0
+# 31 2
+# 15 0
+# 58 0
+# 38 2
+# 47 1
+# 6 3
+# 68 1
+# 46 2
+# 69 0
+# 44 1
+# 63 1
+# 25 0
+# 22 3
+# 15 1
+# 35 3
+# 24 1
+# 66 2
+# 7 1
+# 19 1
+# 24 2
+
+
+# [-1, -1, -1, -1, -1, 35, -1, -1, -1, -1, -1, -1, -1, -1, 43, -1, -1, -1, -1, -1, -1, -1, -1, 45, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 38, -1]
+# [-1, -1, -1, -1, 35, 35, 35, -1, -1, -1, -1, -1, -1, 43, 43, 43, -1, -1, 48, -1, -1, -1, 45, 45, 45, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 46, -1, 38, 38, 38]
+# [-1, -1, -1, -1, 27, 35, -1, 29, -1, -1, 47, -1, -1, 28, 43, -1, 31, 48, 48, 48, -1, 42, -1, 45, 41, -1, -1, 49, -1, -1, 30, -1, -1, -1, 44, -1, -1, 33, -1, -1, 39, -1, -1, 37, -1, -1, 34, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 32, -1, -1, -1, -1, 40, -1, 46, 46, 46, 36, 38, -1]
+# [-1, -1, -1, 27, 27, 27, 29, 29, 29, 47, 47, 47, 28, 28, 28, 31, 31, 31, 48, -1, 42, 42, 42, 41, 41, 41, 49, 49, 49, 30, 30, 30, -1, 44, 44, 44, 33, 33, 33, 39, 39, 39, 37, 37, 37, 34, 34, 34, -1, -1, -1, -1, -1, -1, -1, -1, 32, 32, 32, -1, -1, 40, 40, 40, -1, 46, 36, 36, 36, -1]
+# [-1, -1, -1, -1, 27, -1, -1, 29, -1, -1, 47, -1, -1, 28, -1, -1, 31, -1, -1, -1, -1, 42, -1, -1, 41, -1, -1, 49, -1, -1, 30, -1, -1, -1, 44, -1, -1, 33, -1, -1, 39, -1, -1, 37, -1, -1, 34, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 32, -1, -1, -1, -1, 40, -1, -1, -1, -1, 36, -1, -1]
