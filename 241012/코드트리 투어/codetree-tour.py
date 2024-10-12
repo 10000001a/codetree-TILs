@@ -30,6 +30,7 @@ class CodeTreeLand:
 
         for _ in range(number_of_city):
             self.edge_map.append(list([math.inf] * number_of_city))
+
         for i in range(number_of_city):
             self.edge_map[i][i] = 0
 
@@ -38,7 +39,7 @@ class CodeTreeLand:
         self.cost_from_start_location = [math.inf] * n
 
         self.tour_list: list[Optional[Tour]] = [None] * 30001
-        self.tour_heap: list[tuple[int, Tour]] = []
+        # self.tour_heap: list[tuple[int, Tour]] = []
 
     def add_edge(self, v: int, u: int, w: int):
         if self.edge_map[v][u] > w:
@@ -48,17 +49,17 @@ class CodeTreeLand:
     def add_tour(self, tour_id, revenue, dest):
         tour = Tour(tour_id, revenue, dest)
 
-        if self.cost_from_start_location[dest] != math.inf:
-            profit = int(revenue - self.cost_from_start_location[dest])
-            if profit >= 0:
-                heapq.heappush(self.tour_heap, (-profit, tour))
+        # if self.cost_from_start_location[dest] != math.inf:
+        #     profit = int(revenue - self.cost_from_start_location[dest])
+        #     if profit >= 0:
+        #         heapq.heappush(self.tour_heap, (-profit, tour))
 
         self.tour_list[tour_id] = tour
 
     def delete_tour(self, id):
-        self.tour_heap = list(filter(lambda x: x[1].id != id, self.tour_heap))
+        # self.tour_heap = list(filter(lambda x: x[1].id != id, self.tour_heap))
         self.tour_list[id] = None
-        heapify(self.tour_heap)
+        # heapify(self.tour_heap)
 
     def init_cost_from_start_location(self):
         self.cost_from_start_location = list(self.edge_map[self.start_location])
@@ -84,36 +85,40 @@ class CodeTreeLand:
                     self.cost_from_start_location[i] = self.cost_from_start_location[tmp_location] + \
                                                        self.edge_map[tmp_location][i]
 
-        # print('init:', self.cost_from_start_location)
-
     def change_start_location(self, start_location: int):
         self.start_location = start_location
         self.init_cost_from_start_location()
 
-        # tmp = []
-        # while self.tour_heap:
-        #     tmp.append(heapq.heappop(self.tour_heap)[1])
-        # 
-        # for tour in tmp:
-        #     profit = tour.revenue - self.cost_from_start_location[tour.dest]
-        #     if profit>=0:
-        #         heapq.heappush((-profit, tour))
+        # self.tour_heap = []
+        # for tour in self.tour_list:
+        #     if tour is None:
+        #         continue
+        #     cost = self.cost_from_start_location[tour.dest]
+        #     profit = tour.revenue - cost
+        #     if profit >= 0:
+        #         heapq.heappush(self.tour_heap, (-profit, tour))
 
-        self.tour_heap = []
+    def sell(self) -> int:
+        # if self.tour_heap:
+        #     profit, tour = heapq.heappop(self.tour_heap)
+        #     self.tour_list[tour.id] = None
+        #
+        #     return tour.id
+
+        tour_heap = []
+
         for tour in self.tour_list:
             if tour is None:
                 continue
-            cost = self.cost_from_start_location[tour.dest]
-            profit = tour.revenue - cost
+            profit = tour.revenue - self.cost_from_start_location[tour.dest]
             if profit >= 0:
-                heapq.heappush(self.tour_heap, (-profit, tour))
+                tour_heap.append((-profit, tour))
 
-    def sell(self) -> int:
-        if self.tour_heap:
-            profit, tour = heapq.heappop(self.tour_heap)
-            self.tour_list[tour.id] = None
-
-            return tour.id
+        if tour_heap:
+            heapq.heapify(tour_heap)
+            target_tour = heapq.heappop(tour_heap)[1]
+            self.tour_list[target_tour.id] = None
+            return target_tour.id
 
         return -1
 
