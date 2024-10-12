@@ -1,6 +1,5 @@
 import heapq
 import math
-from heapq import heapify
 from typing import Optional
 
 Q = 0
@@ -35,11 +34,12 @@ class CodeTreeLand:
             self.edge_map[i][i] = 0
 
         # 투어 시작지점의 초기값은 0
+        self.is_start_location_changed: bool = False
         self.start_location = 0
         self.cost_from_start_location = [math.inf] * n
 
         self.tour_list: list[Optional[Tour]] = [None] * 30001
-        # self.tour_heap: list[tuple[int, Tour]] = []
+        self.tour_heap: list[tuple[int, Tour]] = []
 
     def add_edge(self, v: int, u: int, w: int):
         if self.edge_map[v][u] > w:
@@ -86,25 +86,29 @@ class CodeTreeLand:
                                                        self.edge_map[tmp_location][i]
 
     def change_start_location(self, start_location: int):
+        self.is_start_location_changed = self.start_location != start_location
+
         self.start_location = start_location
         self.init_cost_from_start_location()
 
-        # self.tour_heap = []
-        # for tour in self.tour_list:
-        #     if tour is None:
-        #         continue
-        #     cost = self.cost_from_start_location[tour.dest]
-        #     profit = tour.revenue - cost
-        #     if profit >= 0:
-        #         heapq.heappush(self.tour_heap, (-profit, tour))
-
     def sell(self) -> int:
-        # if self.tour_heap:
-        #     profit, tour = heapq.heappop(self.tour_heap)
-        #     self.tour_list[tour.id] = None
-        #
-        #     return tour.id
-
+        # if self.is_start_location_changed:
+        #     self.tour_heap = []
+        # 
+        #     for tour in self.tour_list:
+        #         if tour is None:
+        #             continue
+        #         profit = tour.revenue - self.cost_from_start_location[tour.dest]
+        #         if profit >= 0:
+        #             self.tour_heap.append((-profit, tour))
+        # 
+        # else:
+        #     if self.tour_heap:
+        #         profit, tour = heapq.heappop(self.tour_heap)
+        #         self.tour_list[tour.id] = None
+        # 
+        #         return tour.id
+        # 
         tour_heap = []
 
         for tour in self.tour_list:
