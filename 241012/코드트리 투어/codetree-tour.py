@@ -79,13 +79,10 @@ class CodeTreeLand:
             visited[tmp_location] = True
 
             for i in range(n):
-                if (self.edge_map[tmp_location][i] != math.inf
-                        and self.cost_from_start_location[i] > self.cost_from_start_location[tmp_location] +
-                        self.edge_map[tmp_location][i]):
+                if self.cost_from_start_location[i] > self.cost_from_start_location[tmp_location] + \
+                        self.edge_map[tmp_location][i]:
                     self.cost_from_start_location[i] = self.cost_from_start_location[tmp_location] + \
                                                        self.edge_map[tmp_location][i]
-
-
 
         # print('init:', self.cost_from_start_location)
 
@@ -93,14 +90,23 @@ class CodeTreeLand:
         self.start_location = start_location
         self.init_cost_from_start_location()
 
+        # tmp = []
+        # while self.tour_heap:
+        #     tmp.append(heapq.heappop(self.tour_heap)[1])
+        # 
+        # for tour in tmp:
+        #     profit = tour.revenue - self.cost_from_start_location[tour.dest]
+        #     if profit>=0:
+        #         heapq.heappush((-profit, tour))
+
         self.tour_heap = []
         for tour in self.tour_list:
             if tour is None:
                 continue
             cost = self.cost_from_start_location[tour.dest]
-
-            if cost != math.inf:
-                heapq.heappush(self.tour_heap, (-(tour.revenue - cost), tour))
+            profit = tour.revenue - cost
+            if profit >= 0:
+                heapq.heappush(self.tour_heap, (-profit, tour))
 
     def sell(self) -> int:
         if self.tour_heap:
