@@ -56,18 +56,12 @@ class CodeTreeLand:
         self.tour_list[tour_id] = tour
 
     def delete_tour(self, id):
-        # print('(( start')
-        # print(self.tour_heap)
         self.tour_heap = list(filter(lambda x: x[1].id != id, self.tour_heap))
         self.tour_list[id] = None
-        # print(self.tour_heap)
         heapify(self.tour_heap)
-        # print(self.tour_heap)
-        # print('(( end')
 
     def init_cost_from_start_location(self):
-        self.cost_from_start_location = [math.inf] * n
-        self.cost_from_start_location[self.start_location] = 0
+        self.cost_from_start_location = list(self.edge_map[self.start_location])
 
         visited = [False] * n
 
@@ -75,9 +69,9 @@ class CodeTreeLand:
             tmp_location = -1
             minimum = math.inf
             for i in range(n):
-                if visited[i] == False and self.edge_map[self.start_location][i] < minimum:
+                if visited[i] == False and self.cost_from_start_location[i] < minimum:
                     tmp_location = i
-                    minimum = self.edge_map[self.start_location][i]
+                    minimum = self.cost_from_start_location[i]
 
             if tmp_location == -1:
                 break
@@ -85,11 +79,15 @@ class CodeTreeLand:
             visited[tmp_location] = True
 
             for i in range(n):
-                if (self.edge_map[tmp_location][i] > 0
+                if (self.edge_map[tmp_location][i] != math.inf
                         and self.cost_from_start_location[i] > self.cost_from_start_location[tmp_location] +
                         self.edge_map[tmp_location][i]):
                     self.cost_from_start_location[i] = self.cost_from_start_location[tmp_location] + \
                                                        self.edge_map[tmp_location][i]
+
+
+
+        # print('init:', self.cost_from_start_location)
 
     def change_start_location(self, start_location: int):
         self.start_location = start_location
@@ -105,7 +103,6 @@ class CodeTreeLand:
                 heapq.heappush(self.tour_heap, (-(tour.revenue - cost), tour))
 
     def sell(self) -> int:
-        # print('sell: ', self.tour_heap)
         if self.tour_heap:
             profit, tour = heapq.heappop(self.tour_heap)
             self.tour_list[tour.id] = None
@@ -139,6 +136,7 @@ for _ in range(Q):
 
         code_tree_land.init_cost_from_start_location()
 
+        # code_tree_land.print_edge()
     if query[0] == 200:
         code_tree_land.add_tour(query[1], query[2], query[3])
     if query[0] == 300:
