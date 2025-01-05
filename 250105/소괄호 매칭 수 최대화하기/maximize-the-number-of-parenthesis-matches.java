@@ -45,7 +45,7 @@ public class Main {
     static int N;
     static Scanner sc = new Scanner(System.in);
     static X[] inputs;
-    static int totalR = 0;
+    static int restR = 0;
 
     public static void main(String[] args) {
         N = sc.nextInt();
@@ -55,7 +55,7 @@ public class Main {
 
         for (int i = 0; i < N; i++) {
             inputs[i] = new X(sc.nextLine());
-            totalR += inputs[i].r;
+            restR += inputs[i].r;
         }
 
         Arrays.sort(inputs);
@@ -74,8 +74,9 @@ public class Main {
             final X target = inputs[i];
 
             answer += target.answer;
-            totalR -= target.r;
-            answer += target.l * totalR;
+            restR -= target.r;
+            if (restR > 0)
+                answer += target.l * restR;
         }
 
         return answer;
