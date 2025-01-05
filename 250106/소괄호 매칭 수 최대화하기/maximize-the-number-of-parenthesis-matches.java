@@ -59,10 +59,8 @@ public class Main {
 
     private static void calc() {
         for (int i = 0; i < N; i++) {
-            final X target = inputs[i];
-
-            restR -= target.r;
-            answer += target.l * restR;
+            restR -= inputs[i].r;
+            answer += inputs[i].l * restR;
         }
     }
 }
