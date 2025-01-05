@@ -1,31 +1,15 @@
 
-
 import java.util.*;
 
 class X implements Comparable<X> {
     final int l;
     final int r;
-    final int answer;
 
-    X(String s) {
-        int l = 0;
-        int r = 0;
-        int a = 0;
-
-
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(') {
-                l++;
-            } else {
-                r++;
-                a += l;
-            }
-        }
-
+    X(int l, int r) {
         this.l = l;
         this.r = r;
-        this.answer = a;
     }
+
 
     @Override
     public int compareTo(X o) {
@@ -38,6 +22,7 @@ public class Main {
     static Scanner sc = new Scanner(System.in);
     static X[] inputs;
     static Long restR = 0L;
+    static Long answer = 0L;
 
     public static void main(String[] args) {
         N = sc.nextInt();
@@ -46,27 +31,38 @@ public class Main {
         inputs = new X[N];
 
         for (int i = 0; i < N; i++) {
-            inputs[i] = new X(sc.nextLine());
+            String str = sc.nextLine();
+
+            int l = 0;
+            int r = 0;
+
+
+            for (int j = 0; j < str.length(); j++) {
+                if (str.charAt(j) == '(') {
+                    l++;
+                } else {
+                    r++;
+                    answer += l;
+                }
+            }
+
+
+            inputs[i] = new X(l, r);
             restR += inputs[i].r;
         }
 
         Arrays.sort(inputs);
 
-
-        System.out.println(calc());
+        calc();
+        System.out.println(answer);
     }
 
-    private static Long calc() {
-        long answer = 0L;
-
+    private static void calc() {
         for (int i = 0; i < N; i++) {
             final X target = inputs[i];
 
-            answer += target.answer;
             restR -= target.r;
             answer += target.l * restR;
         }
-
-        return answer;
     }
 }
