@@ -19,12 +19,13 @@ class X implements Comparable<X> {
 
 public class Main {
     static int N;
-    static Scanner sc = new Scanner(System.in);
     static X[] inputs;
     static Long restR = 0L;
     static Long answer = 0L;
 
     public static void main(String[] args) {
+        final Scanner sc = new Scanner(System.in);
+
         N = sc.nextInt();
         sc.nextLine();
 
