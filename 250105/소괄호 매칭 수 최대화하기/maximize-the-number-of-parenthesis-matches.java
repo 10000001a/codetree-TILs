@@ -69,14 +69,13 @@ public class Main {
 
     private static int calc() {
         int answer = 0;
-        int everyR = totalR;
 
         for (int i = 0; i < N; i++) {
             final X target = inputs[i];
 
             answer += target.answer;
-            everyR -= target.r;
-            answer += target.l * everyR;
+            totalR -= target.r;
+            answer += target.l * totalR;
         }
 
         return answer;
