@@ -20,7 +20,6 @@ class X implements Comparable<X> {
 public class Main {
     static int N;
     static X[] inputs;
-    static Long restR = 0L;
     static Long answer = 0L;
 
     public static void main(String[] args) {
@@ -49,7 +48,6 @@ public class Main {
 
 
             inputs[i] = new X(l, r);
-            restR += inputs[i].r;
         }
 
         Arrays.sort(inputs);
