@@ -1,14 +1,16 @@
+
+
 import java.util.*;
 
 class X implements Comparable<X> {
     final int l;
     final int r;
-    final Long answer;
+    final int answer;
 
     X(String s) {
         int l = 0;
         int r = 0;
-        long a = 0L;
+        int a = 0;
 
 
         for (int i = 0; i < s.length(); i++) {
@@ -55,15 +57,14 @@ public class Main {
     }
 
     private static Long calc() {
-        Long answer = 0L;
+        long answer = 0L;
 
         for (int i = 0; i < N; i++) {
             final X target = inputs[i];
 
             answer += target.answer;
             restR -= target.r;
-            if (restR > 0)
-                answer += target.l * restR;
+            answer += target.l * restR;
         }
 
         return answer;
