@@ -59,9 +59,14 @@ public class Main {
     }
 
     private static void calc() {
+        int openSum = 0;
+
         for (int i = 0; i < N; i++) {
-            restR -= inputs[i].r;
-            answer += inputs[i].l * restR;
+            int closed = inputs[i].r;
+
+            answer += (long) openSum * closed;
+
+            openSum += inputs[i].l;
         }
     }
 }
