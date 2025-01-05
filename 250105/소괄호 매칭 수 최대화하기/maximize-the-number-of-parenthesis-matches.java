@@ -3,7 +3,7 @@ import java.util.*;
 class X implements Comparable<X> {
     final int l;
     final int r;
-    final int answer;
+    final Long answer;
 
     int getMargin() {
         return this.l - this.r;
@@ -12,7 +12,7 @@ class X implements Comparable<X> {
     X(String s) {
         int l = 0;
         int r = 0;
-        int a = 0;
+        Long a = 0L;
 
 
         for (int i = 0; i < s.length(); i++) {
@@ -45,7 +45,7 @@ public class Main {
     static int N;
     static Scanner sc = new Scanner(System.in);
     static X[] inputs;
-    static int restR = 0;
+    static Long restR = 0L;
 
     public static void main(String[] args) {
         N = sc.nextInt();
@@ -67,8 +67,8 @@ public class Main {
         System.out.println(calc());
     }
 
-    private static int calc() {
-        int answer = 0;
+    private static Long calc() {
+        Long answer = 0L;
 
         for (int i = 0; i < N; i++) {
             final X target = inputs[i];
