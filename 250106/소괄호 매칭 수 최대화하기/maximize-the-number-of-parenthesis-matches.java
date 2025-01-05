@@ -26,12 +26,11 @@ public class Main {
         final Scanner sc = new Scanner(System.in);
 
         N = sc.nextInt();
-        sc.nextLine();
 
         inputs = new X[N];
 
         for (int i = 0; i < N; i++) {
-            String str = sc.nextLine();
+            String str = sc.next();
 
             int l = 0;
             int r = 0;
