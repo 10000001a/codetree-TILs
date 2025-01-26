@@ -107,8 +107,9 @@ public class Main {
                 int finalJ = j;
                 int count = (int) Arrays.stream(lines).filter(x -> x.hasOwner(finalI) && x.hasOwner(finalJ)).count();
 
-                if (count % 2 == 0) {
-                    answer += count;
+                if (count / 2 >= 1) {
+//                    System.out.println("i: " + i + ", j: " + j + ", count: " + count);
+                    answer += (count / 2) * 2;
                 }
 
 
