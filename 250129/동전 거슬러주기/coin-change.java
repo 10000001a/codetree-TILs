@@ -27,9 +27,12 @@ public class Main {
                     min = 1;
                     break;
                 }
-                if (i - coin <= 0) {
-                    continue;
-                } else {
+
+                if (i - coin > 0) {
+                    if (dp[i - coin] == -1) {
+                        continue;
+                    }
+
                     int n = dp[i - coin] + 1;
 
                     min = Math.min(min, n);
