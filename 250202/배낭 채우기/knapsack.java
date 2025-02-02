@@ -32,12 +32,13 @@ public class Main {
 
             for (int j = M; j >= diamonds[i].weight + 1; j--) {
                 if (dp[j - diamonds[i].weight] != 0) {
-                    dp[j] = Math.max(dp[j - diamonds[i].weight] , dp[j - diamonds[i].weight] + diamonds[i].value);
+                    dp[j] = Math.max(dp[j] , dp[j - diamonds[i].weight] + diamonds[i].value);
                 }
             }
 
             if (diamonds[i].weight <= M)
                 dp[diamonds[i].weight] = Math.max(diamonds[i].value, dp[diamonds[i].weight]);
+
 
 //            System.out.println(Arrays.stream(dp).mapToObj(String::valueOf).collect(Collectors.joining(", ")));
         }
