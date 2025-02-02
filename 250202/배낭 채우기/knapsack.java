@@ -35,7 +35,9 @@ public class Main {
                     dp[j] = Math.max(dp[j - diamonds[i].weight] , dp[j - diamonds[i].weight] + diamonds[i].value);
                 }
             }
-            dp[diamonds[i].weight] = Math.max(diamonds[i].value, dp[diamonds[i].weight]);
+
+            if (diamonds[i].weight <= M)
+                dp[diamonds[i].weight] = Math.max(diamonds[i].value, dp[diamonds[i].weight]);
 
 //            System.out.println(Arrays.stream(dp).mapToObj(String::valueOf).collect(Collectors.joining(", ")));
         }
