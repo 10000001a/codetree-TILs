@@ -40,7 +40,8 @@ public class Main {
 
         for (int first = 1; first <= 3; first++) {
             for (int dir = 1; dir <= 3; dir++) {
-                ans = Math.max(ans, dp[N][first][dir]); 
+                if (first != dir)
+                    ans = Math.max(ans, dp[N][first][dir]); 
             }
         }
 
