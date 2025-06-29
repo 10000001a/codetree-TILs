@@ -24,10 +24,17 @@ public class Main {
         dp[2][2] = coins[1] + coins[2];
 
         for (int i = 3; i <= N; i++) {
-            dp[i][0] = dp[i - 2][0] + coins[i];
-            dp[i][1] = (Math.max(dp[i - 1][0], dp[i - 2][1])) + coins[i];
-            dp[i][2] = (Math.max(dp[i - 1][1], dp[i - 2][2])) + coins[i];
-            dp[i][3] = (Math.max(dp[i - 1][2], dp[i - 2][3])) + coins[i];
+            if (dp[i - 2][0] != 0)
+                dp[i][0] = dp[i - 2][0] + coins[i];
+
+            if (dp[i - 1][0] != 0 && dp[i - 2][1] != 0)
+                dp[i][1] = (Math.max(dp[i - 1][0], dp[i - 2][1])) + coins[i];
+            
+            if (dp[i - 1][1] != 0 && dp[i - 2][2] != 0)
+                dp[i][2] = (Math.max(dp[i - 1][1], dp[i - 2][2])) + coins[i];
+
+            if (dp[i - 1][2] != 0 && dp[i - 2][3] != 0)    
+                dp[i][3] = (Math.max(dp[i - 1][2], dp[i - 2][3])) + coins[i];
         }
 
         int answer = -1;
