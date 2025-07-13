@@ -62,12 +62,12 @@ public class Main {
                 } else {
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
 
-                    if (dp[i - 1][j] <= dp[j][j - 1]) {
+                    if (dp[i - 1][j] <= dp[i][j - 1]) {
                         path[i][j][0] = i;
                         path[i][j][1] = j - 1;
                     }
 
-                    if (dp[i - 1][j] > dp[j][j - 1]) {
+                    if (dp[i - 1][j] > dp[i][j - 1]) {
                         path[i][j][0] = i - 1;
                         path[i][j][1] = j;
                     }
