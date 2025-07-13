@@ -95,7 +95,7 @@ public class Main {
         while (i >= 0 && j >= 0) {
             if (path[i][j][0] == i - 1 && path[i][j][1] == j - 1 && a.charAt(i) == b.charAt(j)) {
 
-                sb.append(a.charAt(i));
+                sb.insert(0, a.charAt(i));
                 i--;
                 j--;
             } else {
