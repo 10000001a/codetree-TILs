@@ -26,7 +26,7 @@ public class Main {
                 dp[i][0] = dp[i - 1][0] + 1;
             }
 
-//            System.out.println(dp[i][0]);
+
         }
 //
         for (int j = 1; j < b.length(); j++) {
@@ -40,8 +40,8 @@ public class Main {
                 dp[0][j] = dp[0][j - 1] + 1;
             }
 
-//            System.out.println(dp[0][j]);
         }
+
 
         for (int i = 1; i < a.length(); i++) {
             for (int j = 1; j < b.length(); j++) {
@@ -49,10 +49,25 @@ public class Main {
 //                    dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]);
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
+
                     dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + 1;
+
+                    if (dp[i - 1][j] == dp[i][j - 1] && dp[i - 1][j - 1] + 1 == dp[i][j - 1]) {
+                        dp[i][j] = dp[i][j - 1];
+                    }
                 }
             }
         }
+
+
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = 0; i < a.length(); i++) {
+//            for (int j = 0; j < b.length(); j++) {
+//                sb.append(dp[i][j]).append("\t");
+//            }
+//            sb.append("\n");
+//        }
+//        System.out.println(sb);
 
         System.out.println(dp[a.length() - 1][b.length() - 1]);
     }
