@@ -20,7 +20,7 @@ public class Main {
 
         for (int i = 1; i <= S.length(); i++) {
             for (int j = 1; j <= P.length(); j++) {
-                // if (j > i) {
+                // if (j > i && (Math.max(dp[i][j - 1], dp[i - 1][j]) < i - 1)) {
                 //     dp[i][j] = dp[i][i];
                 //     continue;
                 // }
@@ -55,7 +55,12 @@ public class Main {
                                 dp[i][j] = dp[i - 1][j - 1] + 1;
                             }
                         } else {
-                            dp[i][j] = dp[i - 1][j];
+                            if (i <= j) {
+                                dp[i][j] = dp[i][j - 1];
+                            } else {
+                                dp[i][j] = dp[i - 1][j];
+                            }
+                            
                         }
                         break;
                 }
