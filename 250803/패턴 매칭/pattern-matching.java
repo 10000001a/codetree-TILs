@@ -35,10 +35,10 @@ public class Main {
                         if (cmp == '.') {
                             dp[i][j] = dp[i - 1][j] + 1;
                         } else if (cmp == S.charAt(i - 1)) {
-                            if (dp[i - 1][j] < i - 1) {
+                            if (dp[i - 1][j] < i - 1 && dp[i][j - 1] < i - 1) {
                                 dp[i][j] = dp[i - 1][j];
                             } else {
-                                dp[i][j] = dp[i - 1][j] + 1;
+                                dp[i][j] = Math.max(dp[i - 1][j] + 1, dp[i][j - 1]);
                             }
                             
                         } else {
