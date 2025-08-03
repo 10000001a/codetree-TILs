@@ -20,10 +20,10 @@ public class Main {
 
         for (int i = 1; i <= S.length(); i++) {
             for (int j = 1; j <= P.length(); j++) {
-                if (j > i) {
-                    dp[i][j] = dp[i][i];
-                    continue;
-                }
+                // if (j > i) {
+                //     dp[i][j] = dp[i][i];
+                //     continue;
+                // }
                 char pattern_char = P.charAt(j - 1);
 
                 switch (pattern_char) {
@@ -47,6 +47,7 @@ public class Main {
                         break;
                     default:
                         if (pattern_char == S.charAt(i - 1)) {
+                            
                             if (dp[i][j - 1] < i - 1) {
                                 dp[i][j] = dp[i - 1][j];
                             } else {
