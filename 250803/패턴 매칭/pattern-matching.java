@@ -24,6 +24,7 @@ public class Main {
                 //     dp[i][j] = dp[i][i];
                 //     continue;
                 // }
+
                 char pattern_char = P.charAt(j - 1);
 
                 switch (pattern_char) {
