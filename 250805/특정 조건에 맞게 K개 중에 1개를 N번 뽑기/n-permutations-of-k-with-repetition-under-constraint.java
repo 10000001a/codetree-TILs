@@ -29,7 +29,7 @@ public class Main {
         
 
         for (int i = 1; i <= k; i++) {
-            int newSameCount = i == num ? sameCount + 1 : sameCount;
+            int newSameCount = i == num ? sameCount + 1 : 1;
 
             if (newSameCount == 3) {
                 continue;
